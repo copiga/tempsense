@@ -104,6 +104,16 @@ main(void)
     ROM_FPUEnable();
     ROM_FPUStackingEnable();
 
+
+
+
+
+
+
+
+
+
+
     //
     // Set the system clock to run at 40Mhz off PLL with external crystal as
     // reference.
