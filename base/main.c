@@ -1,58 +1,26 @@
-//*****************************************************************************
-//
-// qs-rgb.c - Quickstart for the EK-TM4C123GXL.
-//
-// Copyright (c) 2012-2013 Texas Instruments Incorporated.  All rights reserved.
-// Software License Agreement
-// 
-// Texas Instruments (TI) is supplying this software for use solely and
-// exclusively on TI's microcontroller products. The software is owned by
-// TI and/or its suppliers, and is protected under applicable copyright
-// laws. You may not combine this software with "viral" open-source
-// software in order to form a larger program.
-// 
-// THIS SOFTWARE IS PROVIDED "AS IS" AND WITH ALL FAULTS.
-// NO WARRANTIES, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT
-// NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. TI SHALL NOT, UNDER ANY
-// CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR CONSEQUENTIAL
-// DAMAGES, FOR ANY REASON WHATSOEVER.
-// 
-// This is part of revision 1.1 of the EK-TM4C123GXL Firmware Package.
-//
-//*****************************************************************************
-
 #include <stdint.h>
 #include <stdbool.h>
 #include <math.h>
 #include <time.h>
 #include "inc/hw_types.h"
 #include "inc/hw_memmap.h"
-#include "inc/hw_hibernate.h"
-#include "driverlib/fpu.h"
 #include "driverlib/gpio.h"
-#include "driverlib/hibernate.h"
-#include "driverlib/interrupt.h"
 #include "driverlib/pin_map.h"
 #include "driverlib/rom.h"
 #include "driverlib/sysctl.h"
-#include "driverlib/systick.h"
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
-#include "utils/cmdline.h"
-#include "drivers/rgb.h"
-#include "drivers/buttons.h"
+
+#include "defines.h"
+#include "led.h"
 #include "main.h"
 
-void SysTickIntHandler(void){}
+void SysTickIntHandler(void)
+{
+	/*do nothing, return nothing*/
+}
 
-//*****************************************************************************
-//
-// Configure the UART and its pins.  This must be called before UARTprintf().
-//
-//*****************************************************************************
-void
-ConfigureUART(void)
+void ConfigureUART(void)
 {
     //
     // Enable the GPIO Peripheral used by the UART.
@@ -82,58 +50,33 @@ ConfigureUART(void)
     UARTStdioConfig(0, 115200, 16000000);
 }
 
-//*****************************************************************************
-//
-// Main function performs init and manages system.
-//
-// Called automatically after the system and compiler pre-init sequences.
-// Performs system init calls, restores state from hibernate if needed and
-// then manages the application context duties of the system.
-//
-//*****************************************************************************
-int
-main(void)
+int bootUp(void)
+{
+	/*set clock to 20MHz*/
+	ROM_SysCtlClockSet(SYSCTL_SYSDIV_10 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ | SYSCTL_OSC_MAIN);
+
+	/*enable UART*/
+	ConfigureUART();
+
+	/*enable LED*/
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
+	GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, RED_LED|BLUE_LED|GREEN_LED);
+	return 0;
+}
+
+int main(void)
 {
 	int j = 0;
 
-    //
-    // Enable stacking for interrupt handlers.  This allows floating-point
-    // instructions to be used within interrupt handlers, but at the expense of
-    // extra stack usage.
-    //
-    ROM_FPUEnable();
-    ROM_FPUStackingEnable();
+	if(bootUp() == 0)
+	{
+		ledSetColour(GREEN_LED);
+	} else {
+		ledSetColour(RED_LED);
+	}
 
-
-
-
-
-
-
-
-
-
-
-    //
-    // Set the system clock to run at 40Mhz off PLL with external crystal as
-    // reference.
-    //
-    ROM_SysCtlClockSet(SYSCTL_SYSDIV_5 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ |
-                       SYSCTL_OSC_MAIN);
-
-    //
-    // Enable the hibernate module
-    //
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_HIBERNATE);
-
-    //
-    // Enable and Initialize the UART.
-    //
-    ConfigureUART();
 j:
-    UARTprintf("yo!\n");
-    UARTprintf("Type 'help' for a list of commands\n");
-    UARTprintf("%d", j++);
+    UARTprintf("%d\n", j++);
     ROM_SysCtlDelay(1000000);
 goto j;
 }

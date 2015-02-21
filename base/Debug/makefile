@@ -15,6 +15,7 @@ $(GEN_CMDS__FLAG) \
 "./utils/cmdline.obj" \
 "./startup_ccs.obj" \
 "./main.obj" \
+"./led.obj" \
 -l"libc.a" \
 -l"C:/ti/TivaWare_C_Series-1.1/examples/boards/ek-tm4c123gxl/qs-rgb/ccs/../../../../../driverlib/ccs/Debug/driverlib.lib" \
 -l"C:/ti/TivaWare_C_Series-1.1/examples/boards/ek-tm4c123gxl/qs-rgb/ccs/../../../../../usblib/ccs/Debug/usblib.lib" \
@@ -135,8 +136,8 @@ base.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(TMS470_EXECUTABLE_OUTPUTS__QUOTED) "base.out"
-	-$(RM) "main.pp" "startup_ccs.pp" "utils\cmdline.pp" "utils\uartstdio.pp" "utils\ustdlib.pp" "drivers\buttons.pp" "drivers\rgb.pp" 
-	-$(RM) "main.obj" "startup_ccs.obj" "utils\cmdline.obj" "utils\uartstdio.obj" "utils\ustdlib.obj" "drivers\buttons.obj" "drivers\rgb.obj" 
+	-$(RM) "led.pp" "main.pp" "startup_ccs.pp" "utils\cmdline.pp" "utils\uartstdio.pp" "utils\ustdlib.pp" "drivers\buttons.pp" "drivers\rgb.pp" 
+	-$(RM) "led.obj" "main.obj" "startup_ccs.obj" "utils\cmdline.obj" "utils\uartstdio.obj" "utils\ustdlib.obj" "drivers\buttons.obj" "drivers\rgb.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
