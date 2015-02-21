@@ -18,13 +18,9 @@
 int main(void)
 {
 	int j = 0;
-
-	if(bootUp() == 0)
-	{
-		ledSetColour(GREEN_LED);
-	} else {
-		ledSetColour(RED_LED);
-	}
+	ledSetColour(RED_LED);
+	bootUp();
+	ledSetColour(GREEN_LED);
 
 j:
     UARTprintf("%d\n", j++);
