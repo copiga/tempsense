@@ -76,8 +76,8 @@ int bootUp(void)
 	configureUART();
 
 	/*enable LED*/
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
-	GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, RED_LED|BLUE_LED|GREEN_LED);
+	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
+	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, RED_LED|BLUE_LED|GREEN_LED);
 	return 0;
 }
 
