@@ -15,12 +15,29 @@
 #include "led.h"
 #include "main.h"
 
+int main(void)
+{
+	int j = 0;
+
+	if(bootUp() == 0)
+	{
+		ledSetColour(GREEN_LED);
+	} else {
+		ledSetColour(RED_LED);
+	}
+
+j:
+    UARTprintf("%d\n", j++);
+    ROM_SysCtlDelay(1000000);
+goto j;
+}
+
 void SysTickIntHandler(void)
 {
 	/*do nothing, return nothing*/
 }
 
-void ConfigureUART(void)
+void configureUART(void)
 {
     //
     // Enable the GPIO Peripheral used by the UART.
@@ -56,7 +73,7 @@ int bootUp(void)
 	ROM_SysCtlClockSet(SYSCTL_SYSDIV_10 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ | SYSCTL_OSC_MAIN);
 
 	/*enable UART*/
-	ConfigureUART();
+	configureUART();
 
 	/*enable LED*/
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
@@ -64,19 +81,4 @@ int bootUp(void)
 	return 0;
 }
 
-int main(void)
-{
-	int j = 0;
 
-	if(bootUp() == 0)
-	{
-		ledSetColour(GREEN_LED);
-	} else {
-		ledSetColour(RED_LED);
-	}
-
-j:
-    UARTprintf("%d\n", j++);
-    ROM_SysCtlDelay(1000000);
-goto j;
-}

@@ -1,7 +1,7 @@
 ******************************************************************************
                   TI ARM Linker PC v5.0.4                      
 ******************************************************************************
->> Linked Sat Feb 21 16:27:51 2015
+>> Linked Sat Feb 21 16:34:32 2015
 
 OUTPUT FILE NAME:   <base.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 00000a1d
@@ -54,7 +54,7 @@ section   page    origin      length       input sections
                   000008dc    00000084     uartstdio.obj (.text:UARTPrimeTransmit)
                   00000960    0000005e     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_rle.obj (.text)
                   000009be    00000002     startup_ccs.obj (.text:IntDefaultHandler)
-                  000009c0    0000005c     main.obj (.text:ConfigureUART)
+                  000009c0    0000005c     main.obj (.text:configureUART)
                   00000a1c    00000048     rtsv7M4_T_le_v4SPD16_eabi.lib : boot.obj (.text)
                   00000a64    00000044                                   : cpy_tbl.obj (.text)
                   00000aa8    00000042                                   : u_divt2.obj (.text)
@@ -128,7 +128,6 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 address    name
 --------   ----
 00000aed   C$$EXIT
-000009c1   ConfigureUART
 00000c39   GPIODirModeSet
 000005a9   GPIOPadConfigSet
 00000cc5   GPIOPinTypeGPIOOutput
@@ -178,6 +177,7 @@ ffffffff   __c_args__
 00000af1   abort
 ffffffff   binit
 00000bd9   bootUp
+000009c1   configureUART
 00000a65   copy_in
 00000af9   exit
 00000000   g_pfnVectors
@@ -205,7 +205,7 @@ address    name
 000007ad   memcpy
 00000800   __STACK_SIZE
 00000849   __TI_auto_init
-000009c1   ConfigureUART
+000009c1   configureUART
 00000a1d   _c_int00
 00000a65   copy_in
 00000aa9   __aeabi_uidivmod
