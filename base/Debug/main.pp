@@ -21,6 +21,7 @@ main.obj: C:/ti/TivaWare_C_Series-1.1/utils/uartstdio.h
 main.obj: C:/ti/ccsv5/tools/compiler/arm_5.0.4/include/stdarg.h
 main.obj: ../defines.h
 main.obj: ../led.h
+main.obj: ../adc.h
 main.obj: ../main.h
 
 ../main.c: 
@@ -44,4 +45,5 @@ C:/ti/TivaWare_C_Series-1.1/utils/uartstdio.h:
 C:/ti/ccsv5/tools/compiler/arm_5.0.4/include/stdarg.h: 
 ../defines.h: 
 ../led.h: 
+../adc.h: 
 ../main.h: 

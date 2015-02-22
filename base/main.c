@@ -13,17 +13,18 @@
 
 #include "defines.h"
 #include "led.h"
+#include "adc.h"
 #include "main.h"
 
 int main(void)
 {
-	int j = 0;
 	ledSetColour(RED_LED);
 	bootUp();
+	setupADC();
 	ledSetColour(GREEN_LED);
 
 j:
-    UARTprintf("%d\n", j++);
+    UARTprintf("%3d\n", getTempFromInternal());
     ROM_SysCtlDelay(1000000);
 goto j;
 }
