@@ -6,7 +6,7 @@
 #include "driverlib/pin_map.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/rom.h"
-#define SYSCTL_PERIPH_ADC0      0xf0003800  // ADC 0
+
 int setupADC(void)
 {
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_ADC0);
@@ -24,5 +24,5 @@ int getTempFromInternal(void)
     while(!ADCIntStatus(ADC0_BASE, 3, false));
     ADCIntClear(ADC0_BASE, 3);
     ADCSequenceDataGet(ADC0_BASE, 3, temp);
-    return ((1475*1023)-(2250*temp[0]))/10230;
+    return temp[0];//((1475*1023)-(2250*temp[0]))/10230;
 }

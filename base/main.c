@@ -18,13 +18,12 @@
 
 int main(void)
 {
-	ledSetColour(RED_LED);
 	bootUp();
 	setupADC();
 	ledSetColour(GREEN_LED);
 
 j:
-    UARTprintf("%3d\n", getTempFromInternal());
+    UARTprintf("%d\n", getTempFromInternal()/*-419500*/);
     ROM_SysCtlDelay(1000000);
 goto j;
 }
