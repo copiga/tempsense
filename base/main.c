@@ -16,11 +16,15 @@
 #include "adc.h"
 #include "main.h"
 
+#define SW_VERSION 1
+
 int main(void)
 {
 	bootUp();
 	setupADC();
 	ledSetColour(GREEN_LED);
+
+	UARTprintf("booting ivorBiggun %d\n", SW_VERSION);
 
 j:
     UARTprintf("%d\n", getTempFromInternal()/*-419500*/);
