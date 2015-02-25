@@ -16,20 +16,19 @@
 #include "adc.h"
 #include "main.h"
 
-#define SW_VERSION 1
 
 int main(void)
 {
-	bootUp();
-	setupADC();
-	ledSetColour(GREEN_LED);
-
-	UARTprintf("booting ivorBiggun %d\n", SW_VERSION);
-
-j:
-    UARTprintf("%d\n", getTempFromInternal());
+    
+    bootUp();
+    setupADC();
+    ledSetColour(GREEN_LED);
+    
+  j:
+    UARTprintf("%d\n", (getTempFromInternal()+getTempFromInternal())/2);
     ROM_SysCtlDelay(1000000);
-goto j;
+    
+    goto j;
 }
 
 void SysTickIntHandler(void)
