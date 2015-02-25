@@ -27,7 +27,7 @@ int main(void)
 	UARTprintf("booting ivorBiggun %d\n", SW_VERSION);
 
 j:
-    UARTprintf("%d\n", getTempFromInternal()/*-419500*/);
+    UARTprintf("%d\n", getTempFromInternal());
     ROM_SysCtlDelay(1000000);
 goto j;
 }

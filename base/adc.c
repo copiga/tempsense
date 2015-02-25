@@ -24,5 +24,5 @@ int getTempFromInternal(void)
     while(!ADCIntStatus(ADC0_BASE, 3, false));
     ADCIntClear(ADC0_BASE, 3);
     ADCSequenceDataGet(ADC0_BASE, 3, temp);
-    return ((1475 * 4096) - (2250 * temp[0])) / 40960;//temp[0];//((1475*1023)-(2250*temp[0]))/10230;
+    return ((1475 * 4096) - (2250 * temp[0])) / 40960; //calibration
 }
