@@ -1,9 +1,9 @@
 PART=TM4C123GH6PM
-ROOT=/home/copiga/Projects/ti
+ROOT=${TI_DIR}
 include ${ROOT}/makedefs
-VPATH=/home/copiga/Projects/ti/examples/boards/ek-tm4c123gxl/drivers
+VPATH=${ROOT}/examples/boards/ek-tm4c123gxl/drivers
 VPATH+=${ROOT}/utils
-IPATH=/home/copiga/Projects/ti/examples/boards/ek-tm4c123gxl/
+IPATH=${ROOT}/examples/boards/ek-tm4c123gxl/
 IPATH+=${ROOT}
 
 all: ${COMPILER}

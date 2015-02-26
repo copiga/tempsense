@@ -12,7 +12,6 @@
 #include "utils/uartstdio.h"
 #include "utils/cmdline.h"
 
-#include "defines.h"
 #include "led.h"
 #include "adc.h"
 #include "main.h"

@@ -3,7 +3,6 @@
 #include "inc/hw_memmap.h"
 #include "driverlib/gpio.h"
 #include "driverlib/rom.h"
-#include "defines.h"
 #include "led.h"
 
 void ledSetColour(uint8_t colour)
