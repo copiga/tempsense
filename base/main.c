@@ -27,7 +27,6 @@ int main(void)
   j:
     UARTprintf("%d\n", (getTempFromInternal()+getTempFromInternal())/2);
     ROM_SysCtlDelay(1000000);
-    
     goto j;
 }
 
