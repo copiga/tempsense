@@ -18,7 +18,9 @@ ${COMPILER}:
 ${COMPILER}/main.axf: ${COMPILER}/main.o
 ${COMPILER}/main.axf: ${COMPILER}/led.o
 ${COMPILER}/main.axf: ${COMPILER}/adc.o
+${COMPILER}/main.axf: ${COMPILER}/master_commands.o
 ${COMPILER}/main.axf: ${COMPILER}/uartstdio.o
+${COMPILER}/main.axf: ${COMPILER}/cmdline.o
 #example build rule, replace the .c part of the c filename with .o
 #${COMPILER}/main.axf: ${COMPILER}/mysourcefile.o
 ${COMPILER}/main.axf: ${COMPILER}/startup_${COMPILER}.o

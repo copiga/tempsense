@@ -10,23 +10,42 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
+#include "utils/cmdline.h"
 
 #include "defines.h"
 #include "led.h"
 #include "adc.h"
 #include "main.h"
 
+#define INPUT_LENGTH 50
 
 int main(void)
 {
+    char inputText[INPUT_LENGTH];
     
     bootUp();
     setupADC();
     ledSetColour(GREEN_LED);
     
   j:
-    UARTprintf("%d\n", (getTempFromInternal()+getTempFromInternal())/2);
-    ROM_SysCtlDelay(1000000);
+    while(UARTPeek('\r') == -1)
+	ROM_SysCtlDelay(ROM_SysCtlClockGet()/1000);
+    UARTgets(inputText, INPUT_LENGTH);
+    switch(CmdLineProcess(inputText))
+    {
+	case CMDLINE_BAD_CMD:
+	    UARTprintf("bad command\n");
+	    break;
+	case CMDLINE_TOO_MANY_ARGS:
+	    UARTprintf("too many args\n");
+	    break;
+	case CMDLINE_TOO_FEW_ARGS:
+	    UARTprintf("too few args");
+	    break;
+	case CMDLINE_INVALID_ARG:
+	    UARTprintf("invalid arg\n");
+	    break;
+    }
     goto j;
 }
 
