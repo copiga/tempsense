@@ -42,9 +42,9 @@ int ledCommand(int argc, char **argv)
     if(argc >= 2)
     {
 	if(argv[1][1] == 'n')
-	    ledSetColour(GREEN_LED);
+	    ledOn();
 	else
-	    ledSetColour(0);
+	    ledOff();
     }
     return 0;
 }

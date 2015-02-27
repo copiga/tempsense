@@ -1,3 +1,5 @@
+#ifndef LED_DEF
+#define LED_DEF
 #include <stdint.h>
 
 #define RED_LED   0x00000002
@@ -6,3 +8,6 @@
 
 void ledSetColour(uint8_t colour);
 void errorBlink(uint8_t colour, int rate);
+void ledOn(void);
+void ledOff(void);
+#endif

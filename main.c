@@ -14,9 +14,13 @@
 
 #include "led.h"
 #include "adc.h"
+#include "appstate.h"
 #include "main.h"
 
 #define INPUT_LENGTH 50
+
+struct appstate appState;
+
 
 int main(void)
 {
@@ -94,6 +98,7 @@ int bootUp(void)
 	/*enable LED*/
 	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
 	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, RED_LED|BLUE_LED|GREEN_LED);
+	appState.ledOn = true;
 	return 0;
 }
 
