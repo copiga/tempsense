@@ -31,7 +31,7 @@ int setCommand(int argc, char **argv)
 
 int getCommand(int argc, char **argv)
 {
-    UARTprintf("temp: %dc\n", getTempFromInternal());
+    UARTprintf("temp: %dc\n", getAverageTempFromInternal());
     return 0;
 }
 

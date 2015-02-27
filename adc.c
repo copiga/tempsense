@@ -7,6 +7,8 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/rom.h"
 
+#include "adc.h"
+
 int setupADC(void)
 {
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_ADC0);
@@ -26,3 +28,20 @@ int getTempFromInternal(void)
     ADCSequenceDataGet(ADC0_BASE, 3, temp);
     return ((1475 * 4096) - (2250 * temp[0])) / 40960; //calibration
 }
+
+int getAverageTempFromInternal(void)
+{
+    int temp[ADC_AVERAGE_SIZE];
+    int i = 0;
+    int out = 0;
+    
+    for(i=0;i<=ADC_AVERAGE_SIZE;i++)
+	temp[i] = getTempFromInternal();
+    
+    for(i=0;i<=ADC_AVERAGE_SIZE;i++)
+	out+=temp[i];
+    out/=ADC_AVERAGE_SIZE;
+    return out;
+}
+
+    
