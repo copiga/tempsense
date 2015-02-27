@@ -30,26 +30,27 @@ int main(void)
     setupADC();
     ledSetColour(GREEN_LED);
     
-  j:
-    while(UARTPeek('\r') == -1)
-	ROM_SysCtlDelay(ROM_SysCtlClockGet()/1000);
-    UARTgets(inputText, INPUT_LENGTH);
-    switch(CmdLineProcess(inputText))
+    while(true)
     {
-	case CMDLINE_BAD_CMD:
-	    UARTprintf("bad command\n");
-	    break;
-	case CMDLINE_TOO_MANY_ARGS:
-	    UARTprintf("too many args\n");
-	    break;
-	case CMDLINE_TOO_FEW_ARGS:
-	    UARTprintf("too few args");
-	    break;
-	case CMDLINE_INVALID_ARG:
-	    UARTprintf("invalid arg\n");
-	    break;
+	while(UARTPeek('\r') == -1)
+	    ROM_SysCtlDelay(ROM_SysCtlClockGet()/1000);
+	UARTgets(inputText, INPUT_LENGTH);
+	switch(CmdLineProcess(inputText))
+	{
+	    case CMDLINE_BAD_CMD:
+		UARTprintf("bad command\n");
+		break;
+	    case CMDLINE_TOO_MANY_ARGS:
+		UARTprintf("too many args\n");
+		break;
+	    case CMDLINE_TOO_FEW_ARGS:
+		UARTprintf("too few args");
+		break;
+	    case CMDLINE_INVALID_ARG:
+		UARTprintf("invalid arg\n");
+		break;
+	}
     }
-    goto j;
 }
 
 void SysTickIntHandler(void)
