@@ -44,4 +44,22 @@ int getAverageTempFromInternal(void)
     return out;
 }
 
+int getTempFromExternal(void)
+{
+    return 0;
+}
+
+int getAverageTempFromExternal(void)
+{
+    int temp[ADC_AVERAGE_SIZE];
+    int i = 0;
+    int out = 0;
     
+    for(i=0;i<=ADC_AVERAGE_SIZE;i++)
+	temp[i] = getTempFromExternal();
+    
+    for(i=0;i<=ADC_AVERAGE_SIZE;i++)
+	out+=temp[i];
+    out/=ADC_AVERAGE_SIZE;
+    return out;
+}
