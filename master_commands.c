@@ -6,6 +6,7 @@
 #include "utils/cmdline.h"
 
 #include "led.h"
+#include "adc.h"
 #include "appstate.h"
 #include "master_commands.h"
 
@@ -30,7 +31,7 @@ int setCommand(int argc, char **argv)
 
 int getCommand(int argc, char **argv)
 {
-    UARTprintf("getCommand run\n");
+    UARTprintf("temp: %dc\n", getTempFromInternal());
     return 0;
 }
 
