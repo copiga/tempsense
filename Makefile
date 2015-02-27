@@ -36,4 +36,4 @@ ifneq (${MAKECMDGOALS},clean)
 endif
 
 deploy:
-	sudo lm4flash ${COMPILER}/main.bin
+	sudo lm4flash -v ${COMPILER}/main.bin

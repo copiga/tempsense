@@ -6,7 +6,10 @@
 #include "utils/cmdline.h"
 
 #include "led.h"
+#include "appstate.h"
 #include "master_commands.h"
+
+extern struct appstate appState;
 
 //global tCmdLineEntry array for the command processor, do not rename
 tCmdLineEntry g_psCmdTable[]=
@@ -33,7 +36,7 @@ int getCommand(int argc, char **argv)
 
 int statusCommand(int argc, char **argv)
 {
-    UARTprintf("statusCommand run\n");
+    UARTprintf("ledcolour: %d\tledstatus: %s\n", appState.ledColour, (appState.ledOn)?"on":"off");
     return 0;
 }
 
