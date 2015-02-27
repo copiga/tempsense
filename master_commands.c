@@ -8,12 +8,14 @@
 #include "led.h"
 #include "master_commands.h"
 
+//global tCmdLineEntry array for the command processor, do not rename
 tCmdLineEntry g_psCmdTable[]=
 {
     {"get",    getCommand,    "run the get command"},
     {"set",    setCommand,    "run the set command"},
     {"status", statusCommand, "get the status"},
     {"led",    ledCommand,    "toggle the led"},
+    //MUST END IN NULL
     {0,0,0}
 };
 
@@ -37,9 +39,12 @@ int statusCommand(int argc, char **argv)
 
 int ledCommand(int argc, char **argv)
 {
-    if(argv[1][1] == 'n')
-        ledSetColour(GREEN_LED);
-    else
-        ledSetColour(0);
+    if(argc >= 2)
+    {
+	if(argv[1][1] == 'n')
+	    ledSetColour(GREEN_LED);
+	else
+	    ledSetColour(0);
+    }
     return 0;
 }

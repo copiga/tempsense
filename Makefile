@@ -14,7 +14,7 @@ clean:
 
 ${COMPILER}:
 	@mkdir -p ${COMPILER}
-
+all:
 ${COMPILER}/main.axf: ${COMPILER}/main.o
 ${COMPILER}/main.axf: ${COMPILER}/led.o
 ${COMPILER}/main.axf: ${COMPILER}/adc.o
@@ -36,4 +36,4 @@ ifneq (${MAKECMDGOALS},clean)
 endif
 
 deploy:
-	lm4flash ${COMPILER}/main.bin
+	sudo lm4flash ${COMPILER}/main.bin
