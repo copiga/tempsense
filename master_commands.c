@@ -46,8 +46,14 @@ int ledCommand(int argc, char **argv)
     {
 	if(argv[1][1] == 'n')
 	    ledOn();
-	else
+	else if(argv[1][1] == 'f')
 	    ledOff();
+	else if(argv[1][1] == 'e')
+	    ledSetColour(RED_LED);
+	else if(argv[1][1] == 'r')
+	    ledSetColour(GREEN_LED);
+	else if(argv[1][1] == 'l')
+	    ledSetColour(BLUE_LED);
     }
     return 0;
 }
