@@ -1,6 +1,6 @@
 #ifndef MAIN_DEF
 #define MAIN_DEF
-void SysTickIntHandler(void);
-void configureUART(void);
-int bootUp(void);
+extern void SysTickIntHandler(void);
+extern void configureUART(void);
+extern int bootUp(void);
 #endif
