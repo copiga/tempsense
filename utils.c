@@ -1,3 +1,7 @@
+/***************************/
+/* WARNING:		   */
+/*     UNAPOLOGETIC GOTOS  */
+/***************************/
 void floatString(float input, char *out)
 {
     int pos = 0;
