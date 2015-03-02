@@ -96,6 +96,9 @@ int bootUp(void)
 	/*enable UART*/
 	configureUART();
 
+	/*enable FPU*/
+	ROM_FPUEnable();
+	
 	/*enable LED*/
 	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
 	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, RED_LED|BLUE_LED|GREEN_LED);
