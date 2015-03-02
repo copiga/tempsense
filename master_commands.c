@@ -8,6 +8,7 @@
 #include "led.h"
 #include "adc.h"
 #include "appstate.h"
+#include "utils.h"
 #include "master_commands.h"
 
 extern struct appstate appState;
@@ -31,7 +32,9 @@ int setCommand(int argc, char **argv)
 
 int getCommand(int argc, char **argv)
 {
-    UARTprintf("temp: %dc\n", getAverageTempFromInternal());
+    char temp[10];
+    floatString(getTempFromInternal(), temp);
+    UARTprintf("temp: %sc\n", temp);
     return 0;
 }
 

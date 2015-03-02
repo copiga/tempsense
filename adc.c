@@ -19,7 +19,7 @@ int setupADC(void)
     return 0;
 }
 
-int getTempFromInternal(void)
+float getTempFromInternal(void)
 {
     uint32_t temp[1];
     ADCProcessorTrigger(ADC0_BASE, 3);
@@ -29,7 +29,7 @@ int getTempFromInternal(void)
     return ((1475 * 4096) - (2250 * temp[0])) / 40960; //calibration
 }
 
-int getAverageTempFromInternal(void)
+float getAverageTempFromInternal(void)
 {
     int temp[ADC_AVERAGE_SIZE];
     int i = 0;
@@ -44,16 +44,16 @@ int getAverageTempFromInternal(void)
     return out;
 }
 
-int getTempFromExternal(void)
+float getTempFromExternal(void)
 {
     return 0;
 }
 
-int getAverageTempFromExternal(void)
+float getAverageTempFromExternal(void)
 {
-    int temp[ADC_AVERAGE_SIZE];
+    float temp[ADC_AVERAGE_SIZE];
     int i = 0;
-    int out = 0;
+    float out = 0;
     
     for(i=0;i<=ADC_AVERAGE_SIZE;i++)
 	temp[i] = getTempFromExternal();

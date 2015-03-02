@@ -1,11 +1,11 @@
 #ifndef ADC_DEF
 #define ADC_DEF
 extern int setupADC(void);
-extern int getTempFromInternal(void);
-extern int getAverageTempFromInternal(void);
-extern int getTempFromExternal(void);
-extern int getAverageTempFromExternal(void);
+extern float getTempFromInternal(void);
+extern float getAverageTempFromInternal(void);
+extern float getTempFromExternal(void);
+extern float getAverageTempFromExternal(void);
 #endif
 #ifndef ADC_AVERAGE_SIZE
-#define ADC_AVERAGE_SIZE 10
+#define ADC_AVERAGE_SIZE 100
 #endif
