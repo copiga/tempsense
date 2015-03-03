@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 #include <stdlib.h>
 #include "inc/hw_types.h"
 #include "utils/ustdlib.h"
@@ -33,8 +34,12 @@ int setCommand(int argc, char **argv)
 
 int getCommand(int argc, char **argv)
 {
-    if(argc == 2)
-	getTemp(atoi(argv[1]));
+    
+    if(argc == 3)
+    {
+	if(strcmp(argv[1], "temp")==0)
+	    getTemp(atoi(argv[2]));
+    }
     else
 	UARTprintf("ERROR WITH GET\n");
     return 0;
@@ -67,14 +72,17 @@ int ledCommand(int argc, char **argv)
 
 void setTemp(float temp, int probeID)
 {
+    
 }
 
 void getTemp(int probeID)
 {
     char temp[10];
-    floatString(getAverageTempFromInternal(), temp);
+
     if(probeID == 0)
 	floatString(getAverageTempFromInternal(), temp);
+    else
+	strcpy(temp, "NOT DONE");
     UARTprintf("%s\n", temp);
 }
 
