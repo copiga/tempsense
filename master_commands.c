@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "inc/hw_types.h"
 #include "utils/ustdlib.h"
 #include "utils/uartstdio.h"
@@ -26,15 +27,16 @@ tCmdLineEntry g_psCmdTable[]=
 
 int setCommand(int argc, char **argv)
 {
-    UARTprintf("setCommand run\n");
+    UARTprintf("set\n");
     return 0;
 }
 
 int getCommand(int argc, char **argv)
 {
-    char temp[10];
-    floatString(getTempFromInternal(), temp);
-    UARTprintf("temp: %sc\n", temp);
+    if(argc == 2)
+	getTemp(atoi(argv[1]));
+    else
+	UARTprintf("ERROR WITH GET\n");
     return 0;
 }
 
@@ -60,4 +62,26 @@ int ledCommand(int argc, char **argv)
 	    ledSetColour(BLUE_LED);
     }
     return 0;
+}
+
+
+void setTemp(float temp, int probeID)
+{
+}
+
+void getTemp(int probeID)
+{
+    char temp[10];
+    floatString(getAverageTempFromInternal(), temp);
+    if(probeID == 0)
+	floatString(getAverageTempFromInternal(), temp);
+    UARTprintf("%s\n", temp);
+}
+
+void statusProbe(int probeID)
+{
+}
+
+void statusAll(void)
+{
 }
