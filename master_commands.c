@@ -34,7 +34,6 @@ int setCommand(int argc, char **argv)
 
 int getCommand(int argc, char **argv)
 {
-    
     if(argc == 3)
     {
 	if(strcmp(argv[1], "temp")==0)
