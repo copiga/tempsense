@@ -8,5 +8,6 @@ struct appstate
 {
     bool ledOn;
     uint8_t ledColour;
+    uint8_t probeCount;
 };
 #endif

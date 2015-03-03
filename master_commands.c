@@ -47,7 +47,7 @@ int getCommand(int argc, char **argv)
 
 int statusCommand(int argc, char **argv)
 {
-    UARTprintf("ledcolour: %d\tledstatus: %s\n", appState.ledColour, (appState.ledOn)?"on":"off");
+    statusAll();
     return 0;
 }
 
@@ -92,4 +92,5 @@ void statusProbe(int probeID)
 
 void statusAll(void)
 {
+    UARTprintf("ledcolour: %d\tledstatus: %s\tprobeCount: %d\n", appState.ledColour, (appState.ledOn)?"on":"off", appState.probeCount);
 }
