@@ -56,8 +56,8 @@ float getTempFromExternal(void)
     while(!ADCIntStatus(ADC1_BASE, 3, false));
     ADCIntClear(ADC1_BASE, 3);
     ADCSequenceDataGet(ADC1_BASE, 3, temp);
-//    return (temp[0]/10)/1.5;
-    return temp[0];
+    return temp[0]*(3.3/4096)/0.01;
+    /*temperature = reading*(vref/s^ADCwidth)/stepperdegree*/
 }
 
 float getAverageTempFromExternal(void)
