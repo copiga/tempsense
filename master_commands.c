@@ -38,6 +38,8 @@ int getCommand(int argc, char **argv)
     {
 	if(strcmp(argv[1], "temp")==0)
 	    getTemp(atoi(argv[2]));
+	else
+	    UARTprintf("invalid command\n");
     }
     else
 	UARTprintf("ERROR WITH GET\n");
@@ -68,7 +70,6 @@ int ledCommand(int argc, char **argv)
     return 0;
 }
 
-
 void setTemp(float temp, int probeID)
 {
     
@@ -80,6 +81,8 @@ void getTemp(int probeID)
 
     if(probeID == 0)
 	floatString(getAverageTempFromInternal(), temp);
+    else if(probeID == 1)
+	floatString(getAverageTempFromExternal(), temp);
     else
 	strcpy(temp, "NOT DONE");
     UARTprintf("%s\n", temp);

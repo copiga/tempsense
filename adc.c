@@ -16,6 +16,12 @@ int setupADC(void)
     ADCSequenceStepConfigure(ADC0_BASE, 3, 0, ADC_CTL_TS|ADC_CTL_IE|ADC_CTL_END);
     ADCSequenceEnable(ADC0_BASE, 3);
     ADCIntClear(ADC0_BASE, 3);
+
+    ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_ADC1);
+    ADCSequenceConfigure(ADC1_BASE, 3, ADC_TRIGGER_PROCESSOR, 0);
+    ADCSequenceStepConfigure(ADC1_BASE, 3, 0, ADC_CTL_CH0|ADC_CTL_IE|ADC_CTL_END);
+    ADCSequenceEnable(ADC1_BASE, 3);
+    ADCIntClear(ADC1_BASE, 3);
     return 0;
 }
 
@@ -26,7 +32,7 @@ float getTempFromInternal(void)
     while(!ADCIntStatus(ADC0_BASE, 3, false));
     ADCIntClear(ADC0_BASE, 3);
     ADCSequenceDataGet(ADC0_BASE, 3, temp);
-    return ((1475 * 4096) - (2250 * temp[0])) / 40960; //calibration
+    return (1475-((2475 * temp[0]))/4096)/10;//calibration
 }
 
 float getAverageTempFromInternal(void)
@@ -36,8 +42,7 @@ float getAverageTempFromInternal(void)
     int out = 0;
     
     for(i=0;i<=ADC_AVERAGE_SIZE;i++)
-	temp[i] = getTempFromInternal();
-    
+	temp[i] = getTempFromInternal();    
     for(i=0;i<=ADC_AVERAGE_SIZE;i++)
 	out+=temp[i];
     out/=ADC_AVERAGE_SIZE;
@@ -46,7 +51,13 @@ float getAverageTempFromInternal(void)
 
 float getTempFromExternal(void)
 {
-    return 0;
+    uint32_t temp[1];
+    ADCProcessorTrigger(ADC1_BASE, 3);
+    while(!ADCIntStatus(ADC1_BASE, 3, false));
+    ADCIntClear(ADC1_BASE, 3);
+    ADCSequenceDataGet(ADC1_BASE, 3, temp);
+//    return (temp[0]/10)/1.5;
+    return temp[0];
 }
 
 float getAverageTempFromExternal(void)
