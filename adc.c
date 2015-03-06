@@ -19,7 +19,7 @@ int setupADC(void)
 
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_ADC1);
     ADCSequenceConfigure(ADC1_BASE, 3, ADC_TRIGGER_PROCESSOR, 0);
-    ADCSequenceStepConfigure(ADC1_BASE, 3, 0, ADC_CTL_CH0|ADC_CTL_IE|ADC_CTL_END);
+    ADCSequenceStepConfigure(ADC1_BASE, 3, 0, ADC_CTL_CH1|ADC_CTL_IE|ADC_CTL_END);
     ADCSequenceEnable(ADC1_BASE, 3);
     ADCIntClear(ADC1_BASE, 3);
     return 0;

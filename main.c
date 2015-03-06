@@ -13,10 +13,13 @@
 #include "utils/cmdline.h"
 
 #include "led.h"
+#include "effector.h"
 #include "adc.h"
 #include "appstate.h"
 #include "main.h"
 
+#define SYSTICKSS 1
+#define DEFAULT_TEMP 20
 #define INPUT_LENGTH 50
 
 struct appstate appState;
@@ -29,6 +32,8 @@ int main(void)
     bootUp();
     setupADC();
     ledSetColour(GREEN_LED);
+    appState.temp = DEFAULT_TEMP;
+    
     
     while(true)
     {
@@ -55,7 +60,11 @@ int main(void)
 
 void SysTickIntHandler(void)
 {
-	/*do nothing, return nothing*/
+    if(getAverageTempFromExternal() >= appState.temp)
+	outputOff(0);
+    else if(getAverageTempFromExternal() < appState.temp)
+	outputOn(0);
+	
 }
 
 void configureUART(void)
@@ -103,6 +112,11 @@ int bootUp(void)
 	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
 	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, RED_LED|BLUE_LED|GREEN_LED);
 	appState.ledOn = true;
+
+	ROM_SysTickPeriodSet(ROM_SysCtlClockGet() / SYSTICKSS);
+	ROM_SysTickEnable();
+	ROM_SysTickIntEnable();
+	
 	return 0;
 }
 

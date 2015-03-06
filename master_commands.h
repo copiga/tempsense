@@ -6,7 +6,7 @@ extern int getCommand(int argc, char **argv);
 extern int statusCommand(int argc, char **argv);
 extern int ledCommand(int argc, char **argv);
 
-extern void setTemp(float temp, int probeID);
+extern void setTemp(int probeID, float temp);
 extern void getTemp(int probeID);
 extern void statusProbe(int probeID);
 extern void statusAll(void);

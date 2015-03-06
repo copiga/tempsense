@@ -27,8 +27,20 @@ tCmdLineEntry g_psCmdTable[]=
 };
 
 int setCommand(int argc, char **argv)
-{
-    UARTprintf("set\n");
+{	
+    if(argc == 3)
+    {
+	float temp;
+	stringFloat(argv[3], &temp);
+	
+	if(strcmp(argv[1], "temp")==0)
+	    setTemp(atoi(argv[2]), temp);
+	else
+	    UARTprintf("invalid command\n");
+    }
+    else
+	UARTprintf("ERROR WITH SET");
+    
     return 0;
 }
 
@@ -70,9 +82,10 @@ int ledCommand(int argc, char **argv)
     return 0;
 }
 
-void setTemp(float temp, int probeID)
+void setTemp(int probeID, float temp)
 {
-    
+    if(probeID == 0)
+	appState.temp = temp;
 }
 
 void getTemp(int probeID)

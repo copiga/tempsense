@@ -22,6 +22,7 @@ ${COMPILER}/main.axf: ${COMPILER}/master_commands.o
 ${COMPILER}/main.axf: ${COMPILER}/uartstdio.o
 ${COMPILER}/main.axf: ${COMPILER}/cmdline.o
 ${COMPILER}/main.axf: ${COMPILER}/utils.o
+${COMPILER}/main.axf: ${COMPILER}/effector.o
 #example build rule, replace the .c part of the c filename with .o
 #${COMPILER}/main.axf: ${COMPILER}/mysourcefile.o
 ${COMPILER}/main.axf: ${COMPILER}/startup_${COMPILER}.o

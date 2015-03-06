@@ -38,3 +38,8 @@ void floatString(float input, char *out)
     out[x] = 'E';
     goto fin;
 }
+
+void stringFloat(char* input, float* out)
+{
+    *out = 0.00;
+}
