@@ -4,16 +4,15 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-
 struct appstate
 {
-    int ledOn:1;
-    int master:1;
-    unsigned int ledColour:8;
-    unsigned int probeCount:8;
-    unsigned int probeID:8;
+    bool ledOn;
+    bool master;
+    uint8_t ledColour;
+    uint8_t probeCount;
     float temp;
 };
+
 #endif
 //padinfo
 //32 bit word
