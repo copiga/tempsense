@@ -31,7 +31,7 @@ int setCommand(int argc, char **argv)
     if(argc == 3)
     {
 	float temp;
-	stringFloat(argv[3], &temp);
+	stringFloat(argv[3], strlen(argv[3]), &temp);
 	
 	if(strcmp(argv[1], "temp")==0)
 	    setTemp(atoi(argv[2]), temp);

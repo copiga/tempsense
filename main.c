@@ -64,7 +64,7 @@ void SysTickIntHandler(void)
 	outputOff(0);
     else if(getAverageTempFromExternal() < appState.temp)
 	outputOn(0);
-	
+    return;
 }
 
 void configureUART(void)

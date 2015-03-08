@@ -39,7 +39,7 @@ void floatString(float input, char *out)
     goto fin;
 }
 
-void stringFloat(char* input, float* out)
+void stringFloat(char* input, char inputLength, float* out)
 {
-    *out = 0.00;
+    *out = 999.999;
 }
