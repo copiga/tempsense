@@ -28,10 +28,14 @@ tCmdLineEntry g_psCmdTable[]=
 
 int setCommand(int argc, char **argv)
 {	
-    if(argc == 3)
+    if(argc == 4)
     {
 	float temp;
-	stringFloat(argv[3], strlen(argv[3]), &temp);
+	char a[10];
+
+	stringFloat(argv[3], &temp);
+	floatString(temp, a);
+	UARTprintf("\t\t%s\n", a);
 	
 	if(strcmp(argv[1], "temp")==0)
 	    setTemp(atoi(argv[2]), temp);
@@ -39,7 +43,7 @@ int setCommand(int argc, char **argv)
 	    UARTprintf("invalid command\n");
     }
     else
-	UARTprintf("ERROR WITH SET");
+	UARTprintf("ERROR WITH SET\n");
     
     return 0;
 }
