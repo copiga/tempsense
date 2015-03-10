@@ -31,11 +31,8 @@ int setCommand(int argc, char **argv)
     if(argc == 4)
     {
 	float temp;
-	char a[10];
 
 	stringFloat(argv[3], &temp);
-	floatString(temp, a);
-	UARTprintf("\t\t%s\n", a);
 	
 	if(strcmp(argv[1], "temp")==0)
 	    setTemp(atoi(argv[2]), temp);
