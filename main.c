@@ -60,9 +60,9 @@ int main(void)
 
 void SysTickIntHandler(void)
 {
-    if(getAverageTempFromExternal() >= appState.temp)
+    if(getAverageTempFromExternal() > appState.temp+appState.tolerance)
 	outputOff(0);
-    else if(getAverageTempFromExternal() < appState.temp)
+    else if(getAverageTempFromExternal() < appState.temp-appState.tolerance)
 	outputOn(0);
     return;
 }

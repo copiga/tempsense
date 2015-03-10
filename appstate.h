@@ -11,6 +11,7 @@ struct appstate
     uint8_t ledColour;
     uint8_t probeCount;
     float temp;
+    float tolerance;
 };
 
 #endif
