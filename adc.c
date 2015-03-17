@@ -74,3 +74,10 @@ float getAverageTempFromExternal(void)
     out/=ADC_AVERAGE_SIZE;
     return out;
 }
+
+int getSafeAverageTempFromExternal(void)
+{
+    int temp;
+    temp = getAverageTempFromExternal() * 10;
+    return temp;
+}

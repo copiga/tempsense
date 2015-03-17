@@ -24,19 +24,19 @@
 
 struct appstate appState;
 
-
 int main(void)
 {
     char inputText[INPUT_LENGTH];
-    
+
     bootUp();
     setupADC();
+    ledSetColour(RED_LED);
+    tests();
     ledSetColour(GREEN_LED);
-    appState.temp = DEFAULT_TEMP;
     
     
     while(true)
-    {
+    {	
 	while(UARTPeek('\r') == -1)
 	    ROM_SysCtlDelay(ROM_SysCtlClockGet()/1000);
 	UARTgets(inputText, INPUT_LENGTH);
@@ -58,12 +58,19 @@ int main(void)
     }
 }
 
+void maintainTemp(void)
+{
+    if(getSafeAverageTempFromExternal() > (appState.temp + appState.tolerance)*10)
+	outputOff(0);
+    else if(getSafeAverageTempFromExternal() < (appState.temp - appState.tolerance)*10)
+	outputOn(0);
+
+    return;
+}
+
 void SysTickIntHandler(void)
 {
-    if(getAverageTempFromExternal() > appState.temp+appState.tolerance)
-	outputOff(0);
-    else if(getAverageTempFromExternal() < appState.temp-appState.tolerance)
-	outputOn(0);
+    maintainTemp();
     return;
 }
 
@@ -107,17 +114,29 @@ int bootUp(void)
 
 	/*enable FPU*/
 	ROM_FPUEnable();
+	ROM_FPUStackingEnable();
 	
 	/*enable LED*/
 	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
 	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, RED_LED|BLUE_LED|GREEN_LED);
-	appState.ledOn = true;
 
-	ROM_SysTickPeriodSet(ROM_SysCtlClockGet() / SYSTICKSS);
+	appState.ledOn = true;
+	appState.temp = DEFAULT_TEMP;
+	appState.tolerance = 1;
+	
+	ROM_SysTickPeriodSet((ROM_SysCtlClockGet()*10) / SYSTICKSS);
 	ROM_SysTickEnable();
 	ROM_SysTickIntEnable();
 	
 	return 0;
 }
 
+void tests(void)
+{
 
+    if(getSafeAverageTempFromExternal() > (appState.temp + appState.tolerance));
+    else if(getSafeAverageTempFromExternal() > (appState.temp + appState.tolerance));
+    
+
+    return;
+}
