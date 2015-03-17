@@ -30,10 +30,8 @@ int main(void)
 
     bootUp();
     setupADC();
-    ledSetColour(RED_LED);
-    tests();
-    ledSetColour(GREEN_LED);
     
+    ledSetColour(GREEN_LED);
     
     while(true)
     {	
@@ -136,14 +134,4 @@ int bootUp(void)
 	ROM_SysTickIntEnable();
 	
 	return 0;
-}
-
-void tests(void)
-{
-
-    if(getSafeAverageTempFromExternal() > (appState.temp + appState.tolerance));
-    else if(getSafeAverageTempFromExternal() > (appState.temp + appState.tolerance));
-    
-
-    return;
 }
