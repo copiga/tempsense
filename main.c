@@ -122,6 +122,10 @@ int bootUp(void)
 	/*enable LED*/
 	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
 	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, RED_LED|BLUE_LED|GREEN_LED);
+	
+	/*enable output*/
+	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
+	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTD_BASE, GPIO_PIN_7);
 
 	appState.ledOn = true;
 	appState.temp = DEFAULT_TEMP;
