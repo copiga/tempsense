@@ -38,7 +38,10 @@ int main(void)
     while(true)
     {	
 	while(UARTPeek('\r') == -1)
+	{
 	    ROM_SysCtlDelay(ROM_SysCtlClockGet()/1000);
+	    maintainTemp();
+	}
 	UARTgets(inputText, INPUT_LENGTH);
 	switch(CmdLineProcess(inputText))
 	{
@@ -70,7 +73,7 @@ void maintainTemp(void)
 
 void SysTickIntHandler(void)
 {
-    maintainTemp();
+//    maintainTemp();
     return;
 }
 
