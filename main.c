@@ -123,7 +123,7 @@ int bootUp(void)
 	
 	/*enable output*/
 	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
-	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTD_BASE, GPIO_PIN_7);
+	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTA_BASE, GPIO_PIN_2);
 
 	appState.ledOn = true;
 	appState.temp = DEFAULT_TEMP;

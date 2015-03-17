@@ -7,14 +7,12 @@
 
 void outputOn(int output)
 {
-    ROM_GPIOPinWrite(GPIO_PORTD_BASE, GPIO_PIN_7, 1);
-    ledSetColour(BLUE_LED);
+    ROM_GPIOPinWrite(GPIO_PORTA_BASE, GPIO_PIN_2, GPIO_PIN_2);
     return;
 }
 
 void outputOff(int output)
 {
-    ROM_GPIOPinWrite(GPIO_PORTD_BASE, GPIO_PIN_7, 0);
-    ledSetColour(RED_LED);
+    ROM_GPIOPinWrite(GPIO_PORTA_BASE, GPIO_PIN_2, 0);
     return;
 }
