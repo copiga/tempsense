@@ -30,15 +30,16 @@ int main(void)
 
     bootUp();
     setupADC();
-    ledSetColour(RED_LED);
-    tests();
-    ledSetColour(GREEN_LED);
     
+    ledSetColour(GREEN_LED);
     
     while(true)
     {	
 	while(UARTPeek('\r') == -1)
+	{
 	    ROM_SysCtlDelay(ROM_SysCtlClockGet()/1000);
+	    maintainTemp();
+	}
 	UARTgets(inputText, INPUT_LENGTH);
 	switch(CmdLineProcess(inputText))
 	{
@@ -70,7 +71,7 @@ void maintainTemp(void)
 
 void SysTickIntHandler(void)
 {
-    maintainTemp();
+//    maintainTemp();
     return;
 }
 
@@ -133,14 +134,4 @@ int bootUp(void)
 	ROM_SysTickIntEnable();
 	
 	return 0;
-}
-
-void tests(void)
-{
-
-    if(getSafeAverageTempFromExternal() > (appState.temp + appState.tolerance));
-    else if(getSafeAverageTempFromExternal() > (appState.temp + appState.tolerance));
-    
-
-    return;
 }
