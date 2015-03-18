@@ -31,9 +31,7 @@ int main(void)
 
     bootUp();
     setupADC();
-
     calcTemps();
-    
     ledSetColour(GREEN_LED);
     
     while(true)
@@ -70,7 +68,7 @@ void calcTemps(void)
 void maintainTemp(void)
 {
     int temp = getSafeAverageTempFromExternal();
-calcTemps();//    UARTprintf("");    //LEAVE THIS HERE, IT PREVENTS HANGS SOMEHOW!
+    calcTemps();
     if(temp >= appState.maxTemp)
 	outputOff(0);
     else if(temp <= appState.minTemp)
@@ -81,7 +79,6 @@ calcTemps();//    UARTprintf("");    //LEAVE THIS HERE, IT PREVENTS HANGS SOMEHO
 
 void SysTickIntHandler(void)
 {
-    calcTemps();
     maintainTemp();
     return;
 }
