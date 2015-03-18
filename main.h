@@ -5,4 +5,5 @@ extern void configureUART(void);
 extern int bootUp(void);
 extern void tests(void);
 extern void maintainTemp(void);
+extern void calcTemps(void);
 #endif

@@ -12,6 +12,8 @@ struct appstate
     uint8_t probeCount;
     float temp;
     float tolerance;
+    int maxTemp;
+    int minTemp;
 };
 
 #endif

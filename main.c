@@ -20,6 +20,7 @@
 
 #define SYSTICKSS 1
 #define DEFAULT_TEMP 20
+#define DEFAULT_TOLERANCE 0.5
 #define INPUT_LENGTH 50
 
 struct appstate appState;
@@ -30,6 +31,8 @@ int main(void)
 
     bootUp();
     setupADC();
+
+    calcTemps();
     
     ledSetColour(GREEN_LED);
     
@@ -38,7 +41,6 @@ int main(void)
 	while(UARTPeek('\r') == -1)
 	{
 	    ROM_SysCtlDelay(ROM_SysCtlClockGet()/1000);
-	    maintainTemp();
 	}
 	UARTgets(inputText, INPUT_LENGTH);
 	switch(CmdLineProcess(inputText))
@@ -59,11 +61,19 @@ int main(void)
     }
 }
 
+void calcTemps(void)
+{
+    appState.minTemp = (appState.temp - appState.tolerance)*10;
+    appState.maxTemp = (appState.temp + appState.tolerance)*10;
+}
+
 void maintainTemp(void)
 {
-    if(getSafeAverageTempFromExternal() > (appState.temp + appState.tolerance)*10)
+    int temp = getSafeAverageTempFromExternal();
+calcTemps();//    UARTprintf("");    //LEAVE THIS HERE, IT PREVENTS HANGS SOMEHOW!
+    if(temp >= appState.maxTemp)
 	outputOff(0);
-    else if(getSafeAverageTempFromExternal() < (appState.temp - appState.tolerance)*10)
+    else if(temp <= appState.minTemp)
 	outputOn(0);
 
     return;
@@ -71,7 +81,8 @@ void maintainTemp(void)
 
 void SysTickIntHandler(void)
 {
-//    maintainTemp();
+    calcTemps();
+    maintainTemp();
     return;
 }
 
@@ -127,11 +138,11 @@ int bootUp(void)
 
 	appState.ledOn = true;
 	appState.temp = DEFAULT_TEMP;
-	appState.tolerance = 1;
-	
+	appState.tolerance = DEFAULT_TOLERANCE;
+
 	ROM_SysTickPeriodSet((ROM_SysCtlClockGet()*10) / SYSTICKSS);
 	ROM_SysTickEnable();
 	ROM_SysTickIntEnable();
-	
+
 	return 0;
 }

@@ -110,5 +110,5 @@ void statusAll(void)
 {
     char reftemp[10];
     floatString(appState.temp, reftemp);
-    UARTprintf("ledcolour: %d\tledstatus: %s\tprobeCount: %d\treftemp: %s\n", appState.ledColour, (appState.ledOn)?"on":"off", appState.probeCount, reftemp);
+    UARTprintf("ledcolour: %d\tledstatus: %s\tprobeCount: %d\treftemp: %s\tminTemp: %d\tmaxTemp: %d\n", appState.ledColour, (appState.ledOn)?"on":"off", appState.probeCount, reftemp, appState.minTemp, appState.maxTemp);
 }
