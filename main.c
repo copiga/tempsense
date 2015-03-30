@@ -14,6 +14,7 @@
 
 #include "led.h"
 #include "effector.h"
+#include "network.h"
 #include "adc.h"
 #include "appstate.h"
 #include "main.h"
@@ -130,9 +131,15 @@ int bootUp(void)
 	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, RED_LED|BLUE_LED|GREEN_LED);
 	
 	/*enable output*/
-	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
 	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTA_BASE, GPIO_PIN_2);
 
+	/*enable network*/
+	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOC);
+	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
+	ROM_GPIOPinTypeGPIOInput(NET_INTERFACE_A, NET_DATA_PIN|NET_CLOCK_PIN);
+	ROM_GPIOPinTypeGPIOInput(NET_INTERFACE_B, NET_DATA_PIN|NET_CLOCK_PIN);
+
+	
 	appState.ledOn = true;
 	appState.temp = DEFAULT_TEMP;
 	appState.tolerance = DEFAULT_TOLERANCE;
@@ -141,5 +148,8 @@ int bootUp(void)
 	ROM_SysTickEnable();
 	ROM_SysTickIntEnable();
 
+	enableNetInterrupts(NET_INTERFACE_A);
+	enableNetInterrupts(NET_INTERFACE_B);
+	
 	return 0;
 }
