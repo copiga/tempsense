@@ -8,11 +8,14 @@
 #include "driverlib/pin_map.h"
 #include "driverlib/rom.h"
 #include "driverlib/sysctl.h"
-
+#include "utils/uartstdio.h"
 #include "network.h"
 
 void sendBit(bool bit, int interface)
 {
+    UARTprintf("%s\t%d\n", bit?"true":"false", interface);
+    
+    
     disableNetInterrupts(interface);
     ROM_GPIOPinTypeGPIOOutput(interface, NET_DATA_PIN);
     ROM_GPIOPinTypeGPIOOutput(interface, NET_CLOCK_PIN);
@@ -37,19 +40,21 @@ void sendBit(bool bit, int interface)
 
 void sendByte(uint8_t byte, int interface)
 {
+    UARTprintf("sendByte\t%c\n", byte);
+    
     /***************************/
     /* for i from 0 to 8       */
     /* 	      send byte.bit(i) */
     /* return                  */
     /***************************/
-    sendByte((byte&1)?1:0, interface);
-    sendByte((byte&2)?1:0, interface);
-    sendByte((byte&4)?1:0, interface);
-    sendByte((byte&8)?1:0, interface);
-    sendByte((byte&16)?1:0, interface);
-    sendByte((byte&32)?1:0, interface);
-    sendByte((byte&64)?1:0, interface);
-    sendByte((byte&128)?1:0, interface);
+    sendBit((byte&1)?1:0, interface);
+    sendBit((byte&2)?1:0, interface);
+    sendBit((byte&4)?1:0, interface);
+    sendBit((byte&8)?1:0, interface);
+    sendBit((byte&16)?1:0, interface);
+    sendBit((byte&32)?1:0, interface);
+    sendBit((byte&64)?1:0, interface);
+    sendBit((byte&128)?1:0, interface);
 
     return;
 }

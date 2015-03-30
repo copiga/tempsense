@@ -11,6 +11,7 @@
 #include "adc.h"
 #include "appstate.h"
 #include "utils.h"
+#include "network.h"
 #include "master_commands.h"
 
 extern struct appstate appState;
@@ -22,9 +23,19 @@ tCmdLineEntry g_psCmdTable[]=
     {"set",    setCommand,    "run the set command"},
     {"status", statusCommand, "get the status"},
     {"led",    ledCommand,    "toggle the led"},
+    {"send",   sendCommand,   "send data"},
     //MUST END IN NULL
     {0,0,0}
 };
+
+int sendCommand(int argc, char **argv)
+{
+    UARTprintf("send\n");
+    
+    sendByte(argv[1][1], NET_INTERFACE_A);
+
+    return 0;
+}
 
 int setCommand(int argc, char **argv)
 {	

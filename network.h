@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "inc/hw_memmap.h"
 
 #define NET_DATA_PIN GPIO_PIN_6
 #define NET_CLOCK_PIN GPIO_PIN_7
