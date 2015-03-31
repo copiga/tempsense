@@ -104,9 +104,8 @@ void getTemp(int probeID)
 {
     char temp[10];
 
+    
     if(probeID == 0)
-	floatString(getAverageTempFromInternal(), temp);
-    else if(probeID == 1)
 	floatString(getAverageTempFromExternal(), temp);
     else
 	strcpy(temp, "NOT DONE");
