@@ -30,10 +30,14 @@ tCmdLineEntry g_psCmdTable[]=
 
 int sendCommand(int argc, char **argv)
 {
-    UARTprintf("send\n");
+    int i;
     
-    sendByte(argv[1][1], NET_INTERFACE_A);
-
+    for(i=0;argv[1][i]!=0;i++)
+    {
+	sendByte(argv[1][i], NET_INTERFACE_A);	
+	sendByte(argv[1][i], NET_INTERFACE_B);
+    }
+    
     return 0;
 }
 
@@ -45,7 +49,7 @@ int setCommand(int argc, char **argv)
 
 	stringFloat(argv[3], &temp);
 	
-	if(strcmp(argv[1], "temp")==0)
+	if(strcmp(argv[1], "temp") == 0)
 	    setTemp(atoi(argv[2]), temp);
 	else
 	    UARTprintf("invalid command\n");

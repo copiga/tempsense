@@ -144,10 +144,12 @@ int bootUp(void)
 	appState.temp = DEFAULT_TEMP;
 	appState.tolerance = DEFAULT_TOLERANCE;
 
+	/*setup systick*/
 	ROM_SysTickPeriodSet((ROM_SysCtlClockGet()*10) / SYSTICKSS);
 	ROM_SysTickEnable();
 	ROM_SysTickIntEnable();
 
+	/*enable network interrupts*/
 	enableNetInterrupts(NET_INTERFACE_A);
 	enableNetInterrupts(NET_INTERFACE_B);
 	
