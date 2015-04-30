@@ -33,9 +33,7 @@ int main(void)
     bootUp();
     setupADC();
     calcTemps();
-    ledSetColour(GREEN_LED);
-//    while(1)ledSetColour(UARTPeek('\r')==-1?GREEN_LED:BLUE_LED);
-    
+    ledSetColour(GREEN_LED);    
     
     while(true)
     {	
@@ -149,8 +147,8 @@ int bootUp(void)
 	/*enable network*/
 	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOC);
 	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
-	ROM_GPIOPinTypeGPIOOutput(NET_INTERFACE_A, NET_DATA_PIN|NET_CLOCK_PIN);
-	ROM_GPIOPinTypeGPIOOutput(NET_INTERFACE_B, NET_DATA_PIN|NET_CLOCK_PIN);
+	ROM_GPIOPinTypeGPIOInput(NET_INTERFACE_A, NET_DATA_PIN|NET_CLOCK_PIN);
+	ROM_GPIOPinTypeGPIOInput(NET_INTERFACE_B, NET_DATA_PIN|NET_CLOCK_PIN);
 
 	
 	appState.ledOn = true;
