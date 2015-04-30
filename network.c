@@ -22,19 +22,19 @@ void sendBit(bool bit, int interface)
 
     /*set data pin*/
     if(bit)
-	GPIOPinWrite(interface, NET_DATA_PIN, 1);
+	GPIOPinWrite(interface, NET_DATA_PIN, NET_DATA_PIN);
     else
 	GPIOPinWrite(interface, NET_DATA_PIN, 0);
 
     /*set clock pin*/
-    GPIOPinWrite(interface, NET_CLOCK_PIN, 1);
+	GPIOPinWrite(interface, NET_CLOCK_PIN, NET_CLOCK_PIN);
     ROM_SysCtlDelay(NET_MIN_DELAY);
     GPIOPinWrite(interface, NET_CLOCK_PIN, 0);
 
     ROM_GPIOPinTypeGPIOInput(interface, NET_DATA_PIN);
     ROM_GPIOPinTypeGPIOInput(interface, NET_CLOCK_PIN);
     enableNetInterrupts(interface);
-    
+  
     return;
 }
 

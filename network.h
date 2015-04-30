@@ -5,12 +5,12 @@
 #include <stdbool.h>
 #include "inc/hw_memmap.h"
 
-#define NET_DATA_PIN GPIO_PIN_6
-#define NET_CLOCK_PIN GPIO_PIN_7
+#define NET_DATA_PIN GPIO_PIN_3
+#define NET_CLOCK_PIN GPIO_PIN_4
 
 #define NET_MIN_DELAY ROM_SysCtlClockGet()/1000
 
-#define NET_INTERFACE_A GPIO_PORTD_BASE
+#define NET_INTERFACE_A GPIO_PORTB_BASE
 #define NET_INTERFACE_B GPIO_PORTC_BASE
 
 void sendBit(bool bit, int interface);
