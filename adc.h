@@ -1,8 +1,8 @@
 #ifndef ADC_DEF
 #define ADC_DEF
 extern int setupADC(void);
-extern float getTempFromInternal(void);
-extern float getAverageTempFromInternal(void);
+extern float getLightLevel(void);
+extern float getAverageLightLevel(void);
 extern float getTempFromExternal(void);
 extern float getAverageTempFromExternal(void);
 extern int getSafeAverageTempFromExternal(void);

@@ -31,7 +31,7 @@ ${COMPILER}/main.axf: ${ROOT}/driverlib/${COMPILER}/libdriver.a
 ${COMPILER}/main.axf: main.ld
 SCATTERgcc_main=main.ld
 ENTRY_main=ResetISR
-CFLAGSgcc=-DTARGET_IS_BLIZZARD_RB1 -DUART_BUFFERED
+CFLAGSgcc=-DTARGET_IS_BLIZZARD_RB1 -DUART_BUFFERED -DLMT86TEMPSENSOR
 
 
 ifneq (${MAKECMDGOALS},clean)

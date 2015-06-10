@@ -21,7 +21,7 @@
 
 #define SYSTICKSS 1
 #define DEFAULT_TEMP 20
-#define DEFAULT_TOLERANCE 0.5
+#define DEFAULT_TOLERANCE 0.4
 #define INPUT_LENGTH 50
 
 struct appstate appState;
