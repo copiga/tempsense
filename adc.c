@@ -6,6 +6,7 @@
 #include "driverlib/pin_map.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/rom.h"
+#include "utils/uartstdio.h"
 
 #include "adc.h"
 
@@ -32,7 +33,7 @@ float getLightLevel(void)
     while(!ADCIntStatus(ADC0_BASE, 3, false));
     ADCIntClear(ADC0_BASE, 3);
     ADCSequenceDataGet(ADC0_BASE, 3, light);
-    return light[0];//calibration
+    return ((light[0]*3.33)/4096)/1.435;//calibration
 }
 
 float getAverageLightLevel(void)
@@ -48,7 +49,7 @@ float getAverageLightLevel(void)
     out/=ADC_AVERAGE_SIZE;
     return out;
 }
-
+#include "utils.h"
 float getTempFromExternal(void)
 {
     uint32_t temp[1];
@@ -60,8 +61,8 @@ float getTempFromExternal(void)
 #ifdef LM35TEMPSENSOR
     return temp[0]*(3.3/4096)/0.01;
 #elif LMT86TEMPSENSOR
-    millivolts = temp[0]*(330000/4096);
-    return millivolts/-109;
+    millivolts = (temp[0]*3.3)/4096;
+    return (((millivolts*1000)-2103)/(-10.9))-8.3;
 #else
     return temp[0];
 #endif

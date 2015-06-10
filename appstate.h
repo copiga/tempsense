@@ -10,6 +10,7 @@ struct appstate
     bool master;
     uint8_t ledColour;
     uint8_t probeCount;
+    uint8_t probeID;
     float temp;
     float tolerance;
     int maxTemp;

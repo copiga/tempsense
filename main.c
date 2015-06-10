@@ -29,11 +29,13 @@ struct appstate appState;
 int main(void)
 {
     char inputText[INPUT_LENGTH];
-
+    
     bootUp();
     setupADC();
     calcTemps();
     ledSetColour(GREEN_LED);    
+
+    appState.probeID = 1;
     
     while(true)
     {	

@@ -67,7 +67,11 @@ int getCommand(int argc, char **argv)
 	if(strcmp(argv[1], "temp")==0)
 	    getTemp(atoi(argv[2]));
 	else if(strcmp(argv[1], "light")==0)
-	    UARTprintf("%d\n", getLightLevel());
+	{
+	    char l[10];
+	    floatString(getAverageLightLevel(), l);
+	    UARTprintf("%s\n", l);
+	}
 	else
 	    UARTprintf("invalid command\n");
     }
@@ -111,7 +115,7 @@ void getTemp(int probeID)
     char temp[10];
 
     
-    if(probeID == 0)
+    if(probeID == appState.probeID)
 	floatString(getAverageTempFromExternal(), temp);
     else
 	strcpy(temp, "NOT DONE");
